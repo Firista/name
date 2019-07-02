@@ -55,27 +55,8 @@ namespace WpfApp
 
         private ICommand Edit(int id)
         {
-            string connectionString;
-            SqlConnection con;
-
-            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\Database1.mdf;Integrated Security=True";
-
-            con = new SqlConnection(connectionString);
-            con.Open();
-
-            string sql = "select * from Employee where ID = " + id.ToString();
-
-            SqlCommand cmd = new SqlCommand(sql, con);
-
-            SqlDataAdapter adapter = new SqlDataAdapter();
-
-            adapter.UpdateCommand = new SqlCommand(sql, con);
-            adapter.UpdateCommand.ExecuteNonQuery();
-
-            cmd.Dispose();
-            con.Close();
-
-            employeeList = employeeList.Select(x => x).OrderBy(x => x.surname).ToList<Employee>();
+            var addingWindow = new Adding();
+            addingWindow.ShowDialog();
 
             throw new NotImplementedException();
         }
